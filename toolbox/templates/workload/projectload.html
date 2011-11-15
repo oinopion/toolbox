@@ -1,0 +1,33 @@
+{% extends 'workload/base.html' %}
+{% load grid %}
+
+{% block content %}
+    <div class="row">
+        <div class="span15">
+            <table class='workload bordered-table'>
+                <thead>
+                <tr>
+                    <th width="100px">Project</th>
+                    {% for date in project_grid.date_range %}
+                        <th>{{ date|date:"D, j M" }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for project, days_assignments in project_grid %}
+                    <tr>
+                        <th>{{ project.name }}</th>
+                        {% for date, assignments in days_assignments %}
+                            <td data-date="{{ date|date:'c' }}" class='cell'>
+                                {% project_members assignments %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ prev }}">Prev</a>
+            <a class="pull-right" href="{{ next }}">Next</a>
+        </div>
+    </div>
+{% endblock %}
