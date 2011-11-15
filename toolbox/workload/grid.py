@@ -45,17 +45,15 @@ class WeeklySchedule(object):
         self.dates[date].append(assignment.project)
 
     def __iter__(self):
+        np = NonProject()
         for week in self.weeks_range:
-            has_free_slot = False
-            projects = set()
+            projects = list()
             for day in week:
                 day_assignments = self.dates[day]
-                if not day_assignments:
-                    has_free_slot = True
-                projects.update(day_assignments)
-            if has_free_slot:
-                projects.add(NonProject())
-            yield week[0], sorted(projects, key=lambda p: p.name)
+                if not day_assignments and np not in projects:
+                    projects.append(np)
+                projects.extend(p for p in day_assignments if p not in projects)
+            yield week[0], projects
 
 
 class WeeklyProjectSchedule(WeeklySchedule):

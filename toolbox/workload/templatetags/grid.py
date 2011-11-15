@@ -23,7 +23,7 @@ def cell(assignments):
     if length <= 2:
        return ''.join(project_div(project) for project in assignments)
     else:
-        return '%d projects!' % length
+        return '<div class="too-many">%d projects</div>' % length
 
 def project_div(project):
     d = dict(name=esc(project.name), color=esc(project.color))

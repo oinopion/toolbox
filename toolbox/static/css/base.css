@@ -53,9 +53,20 @@ section {
     right: 0;
 }
 
+.too-many {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url(../img/checker.png);
+    color: white;
+    font-weight: bold;
+    font-size: 135%;
+    text-align: center;
+}
+
 .color-1 { background-color: #e2d5f0; }
 
-.color-2 { background-color: #bf5d50; }
+.color-2 { background-color: #4165cc; }
 
 .color-3 { background-color: #F0D893; }
 
