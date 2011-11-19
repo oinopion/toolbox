@@ -104,6 +104,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'toolbox.workload',
+    'toolbox.people',
 )
 
 # A sample logging configuration. The only tangible logging

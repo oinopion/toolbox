@@ -1,8 +1,9 @@
 # encoding: utf-8
 from collections import defaultdict
 from datetime import timedelta
-from dateutil.relativedelta import relativedelta, MO, FR
-from workload.models import Person, Project
+from dateutil.relativedelta import relativedelta, MO
+from toolbox.workload.models import Project
+from toolbox.people.models import Person
 
 class DailySchedule(object):
     def __init__(self, date_range):

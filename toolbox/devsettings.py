@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'toolbox.workload',
+    'toolbox.people',
 ]
 
 INSTALLED_APPS = list(OLD_INSTALLED_APPS)

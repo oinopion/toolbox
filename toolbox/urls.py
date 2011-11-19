@@ -5,9 +5,12 @@ from django.views.generic import TemplateView
 
 admin.autodiscover()
 
+homepage = TemplateView.as_view(template_name="homepage.html")
+
 urlpatterns = patterns('',
-    url(r'^$', TemplateView.as_view(template_name="homepage.html"), name='home'),
+    url(r'^$', homepage, name='home'),
     url(r'^workload/', include('toolbox.workload.urls')),
+    url(r'^people/', include('toolbox.people.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 
