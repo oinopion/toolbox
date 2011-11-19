@@ -98,7 +98,7 @@ class WeeklyProjectGrid(WeeklyGrid):
     def __init__(self, start, weeks, queryset):
         super(WeeklyProjectGrid, self).__init__(start, weeks, queryset)
         self.projects = Project.objects.all()
-        
+
     def single_schedule(self):
         return WeeklyProjectSchedule(self.weeks_range)
 
@@ -174,5 +174,4 @@ def weeks_range(start, weeks=4):
         range.append(date_range_inclusive(monday, friday))
         current_date = current_date + timedelta(days=7)
     return range
-
 

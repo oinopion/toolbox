@@ -21,7 +21,7 @@ def factor_class(value):
 def cell(assignments):
     length = len(assignments)
     if length <= 2:
-       return ''.join(project_div(project) for project in assignments)
+        return ''.join(project_div(project) for project in assignments)
     else:
         return '<div class="too-many">%d projects</div>' % length
 
@@ -34,6 +34,6 @@ def project_members(people):
     html = ['<ul class="unstyled project-members">']
     for person in people:
         html.append('<li><span class="label %s">%s</span></li>' % (
-            esc(person.color), esc(person.name) ))
+            esc(person.color), esc(person.name)))
     html.append('</ul>')
     return mark_safe('\n'.join(html))
