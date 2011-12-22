@@ -18,7 +18,9 @@
                     <tbody>
                     {% for person, days_assignments in grid %}
                         <tr>
-                            <th>{{ person.name }}</th>
+                            <th>
+                                <a href="{{ person.get_absolute_url }}">{{ person.name }}</a>
+                            </th>
                             {% for date, assignments in days_assignments %}
                                 <td data-date="{{ date|date:'c' }}" class='cell'>
                                     <div class="cellwrapper">

@@ -16,9 +16,11 @@
                 <tbody>
                 {% for project, days_assignments in project_grid %}
                     <tr>
-                        <th>{{ project.name }}</th>
+                        <th>
+                            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+                        </th>
                         {% for date, assignments in days_assignments %}
-                            <td data-date="{{ date|date:'c' }}" class='cell'>
+                            <td data-date="{{ date|date:'c' }}" class=''>
                                 {% project_members assignments %}
                             </td>
                         {% endfor %}
@@ -26,8 +28,8 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ prev }}">Prev</a>
-            <a class="pull-right" href="{{ next }}">Next</a>
+            <a class="btn" href="{{ prev }}">Prev</a>
+            <a class="btn pull-right" href="{{ next }}">Next</a>
         </div>
     </div>
 {% endblock %}

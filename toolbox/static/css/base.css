@@ -6,6 +6,10 @@ body {
     padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
 }
 
+a.label {
+    color: white;
+}
+
 /* The white background content wrapper */
 .content {
     background-color: #fff;
@@ -28,21 +32,22 @@ section {
     display: none;
 }
 
-.workload {}
+.workload {
+    table-layout: fixed;
+}
 
-
-.cell {
+.workload .cell {
     padding: 0;
     height: 1px;
 }
 
-.cellwrapper {
+.workload .cellwrapper {
     height: 100%;
     display: -webkit-box;
     -webkit-box-orient: horizontal;
 }
 
-.project {
+.workload  .project {
     display: block;
     -webkit-box-flex: 1;
 }
@@ -66,9 +71,6 @@ section {
 
 .project-members li {display: inline;}
 
-.workload {
-    table-layout: fixed;
-}
 
 .workload ul {
     margin: 0;

@@ -32,12 +32,14 @@ def project_div(project):
         d['url'] = project.get_absolute_url()
         return mark_safe('<a href="%(url)s" class="project %(color)s" title="%(name)s"></a>' % d)
 
+MEMBER_TAG = '<li><a href="%(url)s" class="label %(color)s">%(name)s</a></li>'
 
 @register.simple_tag
 def project_members(people):
     html = ['<ul class="unstyled project-members">']
     for person in people:
-        html.append('<li><span class="label %s">%s</span></li>' % (
-            esc(person.color), esc(person.name)))
+        d = {'url': esc(person.get_absolute_url()), 'color': esc(person.color),
+             'name': esc(person.name)}
+        html.append(MEMBER_TAG % d)
     html.append('</ul>')
     return mark_safe('\n'.join(html))

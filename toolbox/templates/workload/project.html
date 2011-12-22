@@ -4,7 +4,7 @@
 {% block content %}
     <div class="row">
         <div class="span15">
-            <h2>Project {{ project.name }}</h2>
+            <h2>Project: {{ project.name }}</h2>
             <table class='workload bordered-table'>
                 <thead>
                 <tr>
@@ -27,8 +27,6 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ prev }}">Prev</a>
-            <a class="pull-right" href="{{ next }}">Next</a>
         </div>
     </div>
 {% endblock %}
