@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^$', homepage, name='home'),
     url(r'^workload/', include('toolbox.workload.urls')),
     url(r'^people/', include('toolbox.people.urls')),
+    url(r'^stories/', include('toolbox.stories.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 

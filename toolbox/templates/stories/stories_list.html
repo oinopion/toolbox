@@ -1,0 +1,34 @@
+{% extends 'stories/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <ul class="stories span10 unstyled">
+            {% for story in stories_list %}
+                <li class="story row" id="story-{{ story.pk }}"
+                    data-importance-update="{% url importance_update story.pk%}"
+                    data-pk="{{ story.pk }}">
+                    <div class='story-text span6'>
+                        {{ story.text }}
+                    </div>
+                    <p class='story-estimate span2'>
+                        {{ story.estimate|default:'?' }} SP
+                    </p>
+
+                    <div class='story-controls span2'>
+                        <span class="story-sort-handle">Move</span>
+                        <span class="story-edit-handle">Edit</span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="span6">
+            
+        </div>
+    </div>
+
+    <form action="" method="POST" id="importance-form" class="hide">
+        {% csrf_token %}
+        {{ importance_form }}
+    </form>
+{% endblock %}
