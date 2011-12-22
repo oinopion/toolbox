@@ -1,6 +1,7 @@
 # encoding: utf-8
 from collections import defaultdict
-from datetime import timedelta
+from datetime import timedelta, date
+from itertools import groupby
 from dateutil.relativedelta import relativedelta, MO
 from toolbox.workload.models import Project
 from toolbox.people.models import Person
@@ -151,6 +152,43 @@ class ProjectloadGrid(WorkloadGrid):
     def __iter__(self):
         for project in self.projects:
             yield project, self.assignments[project]
+
+
+class ProjectGrid(object):
+    ONE_DAY = timedelta(days=1)
+    WEEKEND = timedelta(days=3)
+    
+    def __init__(self, project):
+        self.project = project
+        self.assignments = project.assignment_set.order_by('date').select_related('person')
+        self.dates = []
+        self.prepare()
+
+    def prepare(self):
+        last_date = None
+        for date, assignments in groupby(self.assignments, key=lambda a: a.date):
+            sep = self.separator(last_date, date)
+            if sep:
+                self.dates.append(sep)
+            self.dates.append((date, [a.person for a in assignments]))
+            last_date = date
+
+    def separator(self, previous, next):
+        if previous is None:
+            return None
+        delta = next - previous
+        if delta == self.ONE_DAY:
+            return None
+        if self.is_weekend(delta, previous):
+            return 'separator', 'weekend'
+        return 'separator', delta.days
+
+    def is_weekend(self, delta, previous):
+        return delta == self.WEEKEND and previous.weekday() == 4
+
+            
+    def __iter__(self):
+        return iter(self.dates)
 
 
 def date_xrange_inclusive(start, end, exclude_weekends=False):

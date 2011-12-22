@@ -30,8 +30,6 @@ section {
 
 .workload {}
 
-.workload tr {
-}
 
 .cell {
     padding: 0;
@@ -45,6 +43,7 @@ section {
 }
 
 .project {
+    display: block;
     -webkit-box-flex: 1;
 }
 

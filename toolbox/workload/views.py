@@ -3,10 +3,12 @@ from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta, MO, FR
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from toolbox.workload.models import Assignment
 from toolbox.workload.grid import WorkloadGrid, ProjectloadGrid, WeeklyGrid, WeeklyProjectGrid
 from toolbox.workload.forms import AssignmentForm
+from workload.grid import ProjectGrid
+from workload.models import Project
 
 WEEK = timedelta(days=4)
 
@@ -54,6 +56,11 @@ def projectmonthload(request, date_str=None):
     next = reverse('projectmonthload_date', args=[next])
     prev = reverse('projectmonthload_date', args=[prev])
     return render(request, 'workload/projectload.html', locals())
+
+def project(request, project_pk):
+    project = get_object_or_404(Project, pk=project_pk)
+    project_grid = ProjectGrid(project)
+    return render(request, 'workload/project.html', locals())
 
 def create_assignment(request):
     form = AssignmentForm(request.POST)

@@ -14,6 +14,7 @@ urlpatterns = patterns('toolbox.workload.views',
 
     url(r'^projectmonthload/$', 'projectmonthload', name='projectmonthload'),
     url(r'^projectmonthload/(\d{4}-\d{2}-\d{2})/$', 'projectmonthload', name='projectmonthload_date'),
+    url(r'^project/(\d+)$', 'project', name='project'),
 
     url(r'^assignment/$', 'create_assignment', name='create_assignment'),
 )

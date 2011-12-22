@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import permalink
 from people.models import Person
 
 class Project(models.Model):
@@ -13,6 +14,10 @@ class Project(models.Model):
     def color(self):
         m = (self.id % 7) + 1
         return 'color-%d' % m
+
+    @permalink
+    def get_absolute_url(self):
+        return 'project', [self.id]
 
 
 class Assignment(models.Model):

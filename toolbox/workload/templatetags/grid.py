@@ -29,7 +29,8 @@ def project_div(project):
     if project.display_as_free:
         return mark_safe('<div class="project %(color)s"></div>' % d)
     else:
-        return mark_safe('<div class="project %(color)s" title="%(name)s"></div>' % d)
+        d['url'] = project.get_absolute_url()
+        return mark_safe('<a href="%(url)s" class="project %(color)s" title="%(name)s"></a>' % d)
 
 
 @register.simple_tag
