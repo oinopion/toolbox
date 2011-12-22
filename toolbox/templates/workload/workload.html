@@ -21,7 +21,9 @@
                             <th>{{ person.name }}</th>
                             {% for date, assignments in days_assignments %}
                                 <td data-date="{{ date|date:'c' }}" class='cell'>
-                                    {% cell assignments %}
+                                    <div class="cellwrapper">
+                                        {% cell assignments %}
+                                    </div>
                                 </td>
                             {% endfor %}
                         </tr>

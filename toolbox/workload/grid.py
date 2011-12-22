@@ -30,6 +30,8 @@ class ProjectSchedule(DailySchedule):
 
 
 class NonProject(object):
+    display_as_free = True
+    
     def __init__(self, name='Free', color='color-0'):
         self.name = name
         self.color = color
@@ -70,6 +72,7 @@ class WeeklyProjectSchedule(WeeklySchedule):
                 people.update(day_assignments)
             yield week[0], sorted(people, key=lambda person: person.name)
 
+
 class WeeklyGrid(object):
     def __init__(self, start, weeks, queryset):
         self.weeks_range = weeks_range(start, weeks)
@@ -95,7 +98,6 @@ class WeeklyGrid(object):
 
 
 class WeeklyProjectGrid(WeeklyGrid):
-
     def __init__(self, start, weeks, queryset):
         super(WeeklyProjectGrid, self).__init__(start, weeks, queryset)
         self.projects = Project.objects.all()
@@ -115,7 +117,8 @@ class WorkloadGrid(object):
     schedule_class = PersonSchedule
 
     def __init__(self, start, end, queryset):
-        self.date_range = date_range_inclusive(start, end, exclude_weekends=True)
+        self.date_range = date_range_inclusive(start, end,
+                                               exclude_weekends=True)
         self.assignments = defaultdict(self.single_schedule)
         self.people = Person.objects.all()
         for assignment in queryset.filter(date__gte=start).filter(

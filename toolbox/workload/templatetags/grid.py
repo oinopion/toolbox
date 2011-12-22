@@ -2,6 +2,7 @@
 from django import template
 from django.utils.safestring import mark_safe
 from django.utils.html import conditional_escape as esc
+
 register = template.Library()
 
 @register.filter
@@ -17,17 +18,19 @@ def factor_class(value):
         klass += 'high'
     return klass
 
+
 @register.simple_tag
 def cell(assignments):
-    length = len(assignments)
-    if length <= 2:
-        return ''.join(project_div(project) for project in assignments)
-    else:
-        return '<div class="too-many">%d projects</div>' % length
+    return ''.join(project_div(project) for project in assignments)
+
 
 def project_div(project):
     d = dict(name=esc(project.name), color=esc(project.color))
-    return mark_safe('<div class="project %(color)s" rel="twipsy" title="%(name)s"></div>' % d)
+    if project.display_as_free:
+        return mark_safe('<div class="project %(color)s"></div>' % d)
+    else:
+        return mark_safe('<div class="project %(color)s" title="%(name)s"></div>' % d)
+
 
 @register.simple_tag
 def project_members(people):

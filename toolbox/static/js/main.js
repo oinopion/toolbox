@@ -1,7 +1,7 @@
 // main
 
 $(function() {
-  $('.project').twipsy();
+  $('.project[title]').twipsy();
   $('.date-picker').datepicker({
     beforeShowDay: $.datepicker.noWeekends,
     dateFormat: $.datepicker.ISO_8601,

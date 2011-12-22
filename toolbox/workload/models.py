@@ -4,6 +4,8 @@ from people.models import Person
 class Project(models.Model):
     name = models.CharField(max_length=250)
 
+    display_as_free = False
+    
     def __unicode__(self):
         return self.name
 
