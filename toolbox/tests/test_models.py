@@ -1,6 +1,12 @@
 import pytest
-from toolbox.models import SubtaskError
-from toolbox.models import Story, Task
+from toolbox.models import Story, Task, Project
+
+
+class TestProjectCreation:
+    def test_basic_creation(self):
+        title = "Awesome Project"
+        p = Project(title)
+        assert p.title == title
 
 
 class TestTaskCreation:
@@ -34,11 +40,6 @@ class TestAddingSubtask:
         story.add_subtask(task)
         assert story is task.parent
 
-    def test_cannot_add_subtask_if_story_has_parent(self, story, task):
-        story.parent = object()
-        with pytest.raises(SubtaskError):
-            story.add_subtask(task)
-
     def test_adding_subtask_is_indempotent(self, story, task):
         story.add_subtask(task)
         story.add_subtask(task)
@@ -62,10 +63,8 @@ class TestRemovingTask:
 def pytest_funcarg__story(request=None):
     return Story('As a user ...')
 
-
 def pytest_funcarg__task(request=None):
     return Task('Prepare initial repository')
-
 
 def pytest_funcarg__task_with_story(request=None):
     s = pytest_funcarg__story()

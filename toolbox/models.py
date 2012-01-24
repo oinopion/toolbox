@@ -3,8 +3,10 @@
 class ModelError(Exception):
     """Standard model error"""
 
-class SubtaskError(ModelError):
-    """Raised if subtask cannot be added"""
+
+class Project(object):
+    def __init__(self, title):
+        self.title = title
 
 
 class Task(object):
@@ -20,12 +22,11 @@ class Story(Task):
         self.subtasks = []
 
     def add_subtask(self, subtask):
-        if self.parent:
-            raise SubtaskError()
+        if subtask.parent is self:
+            return
         if subtask.parent:
-            subtask.parent.subtasks.remove(subtask)
-        if not subtask in self.subtasks:
-            self.subtasks.append(subtask)
+            subtask.parent.remove_subtask(subtask)
+        self.subtasks.append(subtask)
         subtask.parent = self
 
     def remove_subtask(self, subtask):
