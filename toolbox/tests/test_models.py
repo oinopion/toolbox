@@ -40,7 +40,7 @@ class TestAddingSubtask:
         story.add_subtask(task)
         assert story is task.parent
 
-    def test_adding_subtask_is_indempotent(self, story, task):
+    def test_adding_subtask_is_idempotent(self, story, task):
         story.add_subtask(task)
         story.add_subtask(task)
         assert story.subtasks.count(task) == 1
