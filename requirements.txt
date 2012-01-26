@@ -1,0 +1,4 @@
+lettuce==0.1.34
+mock==0.7.2
+nose==1.1.2
+wsgiref==0.1.2
