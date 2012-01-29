@@ -1,3 +1,4 @@
+from datetime import timedelta
 from mock import sentinel
 from toolbox.models import User, Project
 
@@ -53,6 +54,12 @@ class TestProjectModel:
         other_user = create_user('bob@example.com')
         self.project.add_user(other_user)
         assert self.project in other_user.projects
+
+    def test_default_sprint_length_is_one_week(self):
+        assert self.project.default_sprint_length == timedelta(days=7)
+
+    def test_next_sprint_start_is_none(self):
+        assert self.project.next_sprint_start_date is None
 
 
 def create_user(email='alice@example.com'):

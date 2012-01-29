@@ -1,4 +1,5 @@
 # encoding: utf-8
+from datetime import timedelta
 
 class ModelError(Exception):
     """ Standard model error """
@@ -26,6 +27,8 @@ class Project(Model):
         self.creator = creator
         self.name = name
         self.users = [creator]
+        self.default_sprint_length = timedelta(days=7)
+        self.next_sprint_start_date = None
 
     def add_user(self, user):
         self.users.append(user)
