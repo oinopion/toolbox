@@ -1,6 +1,7 @@
 from datetime import timedelta
 from mock import sentinel
 from toolbox.models import User, Project
+from toolbox.tests.creators import create_user, create_project
 
 
 class TestUserModel:
@@ -60,12 +61,3 @@ class TestProjectModel:
 
     def test_next_sprint_start_is_none(self):
         assert self.project.next_sprint_start_date is None
-
-
-def create_user(email='alice@example.com'):
-    return User(email=email)
-
-def create_project(name='Project Manhattan', creator=create_user):
-    if callable(creator):
-        creator = creator()
-    return Project(name=name, creator=creator)
