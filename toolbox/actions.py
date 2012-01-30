@@ -2,7 +2,7 @@ from toolbox.models import User
 
 class Action(object):
     """ Base action class """
-    store = None
+    stores = None
 
     def perform(self):
         return self.run()
@@ -17,7 +17,7 @@ class CreateUser(Action):
         self.user = User(email=email)
 
     def run(self):
-        self.store.users.add(self.user)
+        self.stores.users.add(self.user)
 
 
 class CreateProject(Action):
@@ -27,7 +27,7 @@ class CreateProject(Action):
 
     def run(self):
         project = self.user.create_project(self.project_name)
-        self.store.projects.add(project)
+        self.stores.projects.add(project)
 
 
 class AddUserToProject(Action):

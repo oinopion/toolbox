@@ -7,11 +7,11 @@ class ActionTest(object):
     action_class = None
 
     def setup(self):
-        self.store = Mock()
+        self.stores = Mock()
 
     def action(self, *args, **kwargs):
         action = self.action_class(*args, **kwargs)
-        action.store = self.store
+        action.stores = self.stores
         return action
 
 
@@ -21,7 +21,7 @@ class TestCreateUserAction(ActionTest):
     def test_creates_user(self):
         action = self.action('alice@example.com')
         action.perform()
-        user = self.store.users.add.call_args[0][0]
+        user = self.stores.users.add.call_args[0][0]
         assert user.email == 'alice@example.com'
 
 
@@ -33,7 +33,7 @@ class TestCreateProjectAction(ActionTest):
         name = "Project One"
         action = self.action(user=user, project_name=name)
         action.perform()
-        project = self.store.projects.add.call_args[0][0]
+        project = self.stores.projects.add.call_args[0][0]
         assert project.name == name
 
 
