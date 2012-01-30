@@ -1,9 +1,20 @@
 # encoding: utf-8
 
-class Store(object):
-    def __init__(self):
-        self.users = None
+class UserStore(object):
+    def add(self, obj):
+        raise NotImplementedError
 
 
-class InMemoryStore(object):
-    pass
+class ProjectStore(object):
+    def add(self, obj):
+        raise NotImplementedError
+
+
+class InMemoryUserStore(UserStore):
+    def add(self, obj):
+        return obj
+
+
+class InMemoryProjectStore(ProjectStore):
+    def add(self, obj):
+        return obj
